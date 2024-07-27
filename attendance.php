@@ -20,8 +20,6 @@ session_start();
     <title>AttendanceApp</title>
 </head>
 <body>
-    <!--<h1>Hello</h1>     
-    <button id="btnLogout">LOGOUT</button>-->
      <div class="page">
         <div class="header-area">
             <div class="logo-area"> <h2 class="logo">ATTENDANCE APP</h2></div>
@@ -31,99 +29,17 @@ session_start();
               <div class="label-area"><label>SESSION</label></div>
               <div class="dropdown-area">
                 <select class="ddlclass" id="ddlclass">
-                   <!-- <option>SELECT ONE</option>
-                    <option>2023 AUTUMN</option>
-                    <option>2023 SPRING</option>-->
                 </select>
               </div>
         </div>
 
         <div class="classlist-area" id="classlistarea">
-          <!--<div class="classcard">CS101</div>
-          <div class="classcard">CS101</div>
-          <div class="classcard">CS101</div>
-          <div class="classcard">CS101</div>
-          <div class="classcard">CS101</div>
-          <div class="classcard">CS101</div>
-          <div class="classcard">CS101</div>-->
         </div>
 
         <div class="classdetails-area" id="classdetailsarea">
-            <!--<div class="classdetails">
-                <div class="code-area">CS101</div>
-                <div class="title-area">INTRODUCTION TO SCIENTIFIC COMPUTING</div>
-                <div class="ondate-area">
-                    <input type="date">
-                </div>
-            </div>-->
         </div>
         
-        <div class="studentlist-area" id="studentlistarea">
-            <!--<div class="studenttlist"><label>STUDENT LIST</label></div>
-            <div class="studentdetails">
-                <div class="slno-area">001</div>
-                <div class="rollno-area">CSB21001</div>
-                <div class="name-area">PRAKASH KUMAR CHAUHAN</div>
-                <div class="checkbox-area">
-                    <input type="checkbox">
-                </div>
-            </div>
-
-            <div class="studentdetails">
-                <div class="slno-area">001</div>
-                <div class="rollno-area">CSB21001</div>
-                <div class="name-area">PRAKASH KUMAR CHAUHAN</div>
-                <div class="checkbox-area">
-                    <input type="checkbox">
-                </div>
-            </div>
-
-            <div class="studentdetails">
-                <div class="slno-area">001</div>
-                <div class="rollno-area">CSB21001</div>
-                <div class="name-area">PRAKASH KUMAR CHAUHAN</div>
-                <div class="checkbox-area">
-                    <input type="checkbox">
-                </div>
-            </div>
-
-            <div class="studentdetails">
-                <div class="slno-area">001</div>
-                <div class="rollno-area">CSB21001</div>
-                <div class="name-area">PRAKASH KUMAR CHAUHAN</div>
-                <div class="checkbox-area">
-                    <input type="checkbox">
-                </div>
-            </div>
-
-            <div class="studentdetails">
-                <div class="slno-area">001</div>
-                <div class="rollno-area">CSB21001</div>
-                <div class="name-area">PRAKASH KUMAR CHAUHAN</div>
-                <div class="checkbox-area">
-                    <input type="checkbox">
-                </div>
-            </div>
-
-            <div class="studentdetails">
-                <div class="slno-area">001</div>
-                <div class="rollno-area">CSB21001</div>
-                <div class="name-area">PRAKASH KUMAR CHAUHAN</div>
-                <div class="checkbox-area">
-                    <input type="checkbox">
-                </div>
-            </div>
-
-            <div class="studentdetails">
-                <div class="slno-area">001</div>
-                <div class="rollno-area">CSB21001</div>
-                <div class="name-area">PRAKASH KUMAR CHAUHAN</div>
-                <div class="checkbox-area">
-                    <input type="checkbox">
-                </div>
-            </div>
-           -->
-           
+        <div class="studentlist-area" id="studentlistarea">    
         </div>
 
        
@@ -140,7 +56,5 @@ session_start();
 
     <script src="js/jquery.js"></script>
     <script src="js/attendance.js"></script>
-    <!--renamed the files just to keep the filenames
-    similar, nothing more than that-->
 </body>
 </html>
