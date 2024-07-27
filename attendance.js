@@ -1,25 +1,3 @@
-
-/*
-I will need this templet many times ahead
-$.ajax({
-        url:"ajaxhandler/attendanceAJAX.php",
-        type:"POST",
-        dataType:"json",
-        data:{},
-        beforeSend:function(e)
-        {
-
-        },
-        success:function(rv)
-        {
-
-        },
-        error:function(e)
-        {
-
-        }
-    });
-*/
 function  getSessionHTML(rv)
 {
     let x=``;
@@ -34,7 +12,6 @@ function  getSessionHTML(rv)
 }
 function loadSessions()
 {
-    //make an ajax call and load the sessions from DB
     $.ajax({
         url:"ajaxhandler/attendanceAJAX.php",
         type:"POST",
@@ -43,20 +20,15 @@ function loadSessions()
         beforeSend:function(e)
         {
             $("#overlay").fadeIn();
-            //$("#overlay").fadeOut();
         },
         success:function(rv)
         {
-            //$("#overlay").fadeIn();
             $("#overlay").fadeOut();
-            //alert(JSON.stringify(rv));
-            //lets create the HTML from rv dynamically
             let x=getSessionHTML(rv);
             $("#ddlclass").html(x);
         },
         error:function(e)
         {
-            //$("#overlay").fadeIn();
             $("#overlay").fadeOut();
             alert("OOPS!");
         }
@@ -77,10 +49,6 @@ function getCourseCardHTML(classlist)
 
 function fetchFacultyCourses(facid,sessionid)
 {
-    //get al the courses taken by the loged in faculty
-    //for the selected session
-    //from DB
-    //by an ajax call
     $.ajax({
         url:"ajaxhandler/attendanceAJAX.php",
         type:"POST",
@@ -89,19 +57,15 @@ function fetchFacultyCourses(facid,sessionid)
         beforeSend:function(e)
         {
             $("#overlay").fadeIn();
-            //$("#overlay").fadeOut();
         },
         success:function(rv)
         {
-           //$("#overlay").fadeIn();
            $("#overlay").fadeOut(); 
-        //alert(JSON.stringify(rv));
         let x=getCourseCardHTML(rv);
         $("#classlistarea").html(x);
         },
         error:function(e)
         {
-            //$("#overlay").fadeIn();
             $("#overlay").fadeOut();
         }
     });
@@ -111,19 +75,18 @@ function getClassdetailsAreaHTML(classobject)
 {
     let dobj=new Date();    
     let ondate=`2023-02-01`;
-    let year=dobj.getFullYear();//xxxx format
-    let month=dobj.getMonth()+1;//returns 0-11
+    let year=dobj.getFullYear();
+    let month=dobj.getMonth()+1;
     if(month<10)
     {
-        month="0"+month;//its a string now
+        month="0"+month;
     }
-    let day=dobj.getDate();//1-31
+    let day=dobj.getDate();
     if(day<10)
     {
-        day="0"+day;//its a string now
+        day="0"+day;
     }
     ondate=year+"-"+month+"-"+day;
-    //alert(ondate);
  let x=`<div class="classdetails">
  <div class="code-area">${classobject['code']}</div>
  <div class="title-area">${classobject['title']}</div>
@@ -230,8 +193,6 @@ function getStudentListHTML(o)
         checkedState=`checked`;
         rowcolor='presentcolor'
     }
-    //we want different color for checked and unchecked rows
-
     x=x+`<div class="studentdetails ${rowcolor}" id="student${cs['id']}">
     <div class="slno-area">${(i+1)}</div>
     <div class="rollno-area">${cs['roll_no']}</div>
@@ -250,7 +211,7 @@ function getStudentListHTML(o)
 
 function fetchStudentList(sessionid,classid,facid,ondate)
 {
-    //make an ajax call and get the data from DB
+
     $.ajax({
         url:"ajaxhandler/attendanceAJAX.php",
         type:"POST",
@@ -259,27 +220,22 @@ function fetchStudentList(sessionid,classid,facid,ondate)
         beforeSend:function(e)
         {
             $("#overlay").fadeIn();
-           // $("#overlay").fadeOut();
+        
         },
         success:function(rv)
         {
-            //$("#overlay").fadeIn();
             $("#overlay").fadeOut();
-          //alert(JSON.stringify(rv));
-          //get the studentlist HTML
           let x=getStudentListHTML(rv);
           $("#studentlistarea").html(x);
         },
         error:function(e)
         {
-                //$("#overlay").fadeIn();
             $("#overlay").fadeOut();
         }
     });
 }
 function saveAttendance(studentid,courseid,facultyid,sessionid,ondate,ispresent)
 {
-    //make an ajax call and save the attendance of the student in DB
     $.ajax({
         url:"ajaxhandler/attendanceAJAX.php",
         type:"POST",
@@ -287,15 +243,11 @@ function saveAttendance(studentid,courseid,facultyid,sessionid,ondate,ispresent)
         data:{studentid:studentid,courseid:courseid,facultyid:facultyid,sessionid:sessionid,ondate:ondate,ispresent:ispresent,action:"saveattendance"},
         beforeSend:function(e)
         {
-                //$("#overlay").fadeIn();
-            //$("#overlay").fadeOut();
+   
         },
         success:function(rv)
         {
-            //$("#overlay").fadeIn();
-            //$("#overlay").fadeOut();
-        //alert(JSON.stringify(rv));
-        //we saved the attendance now lets view them
+       
         if(ispresent=="YES")
         {
             $("#student"+studentid).removeClass('absentcolor');
@@ -308,8 +260,7 @@ function saveAttendance(studentid,courseid,facultyid,sessionid,ondate,ispresent)
         },
         error:function(e)
         {
-            //$("#overlay").fadeIn();
-            //$("#overlay").fadeOut();
+
             alert("OOPS!");
         }
     });
@@ -317,7 +268,6 @@ function saveAttendance(studentid,courseid,facultyid,sessionid,ondate,ispresent)
 
 function downloadCSV(sessionid,classid,facid,name='downloadDetailsReport')
 {
-    //make ajax call to fetch from server
     $.ajax({
         url:"ajaxhandler/attendanceAJAX.php",
         type:"POST",
@@ -326,14 +276,10 @@ function downloadCSV(sessionid,classid,facid,name='downloadDetailsReport')
         beforeSend:function(e)
         {
             $("#overlay").fadeIn();
-            //$("#overlay").fadeOut();
         },
         success:function(rv)
         {
-            //$("#overlay").fadeIn();
             $("#overlay").fadeOut();
-       //alert(JSON.stringify(rv));
-       //lets download the file
        let x=`
        <object data=${rv['filename']} type="text/html" target="_parent"></object>       
        `;
@@ -341,7 +287,6 @@ function downloadCSV(sessionid,classid,facid,name='downloadDetailsReport')
         },
         error:function(e)
         {
-            //$("#overlay").fadeIn();
             $("#overlay").fadeOut();
             alert("OOPS!");
         }
@@ -357,13 +302,9 @@ function getDefaulterList(sessionid,classid,facid,cutoff=75,caption='')
         beforeSend:function(e)
         {
             $("#overlay").fadeIn();           
-            //$("#overlay").fadeOut();
         },
         success:function(rv)
         {
-          //alert(JSON.stringify(rv));
-          //get the studentlist HTML   
-        //alert(JSON.stringify(rv))   
          $("#overlay").fadeOut();
 
          let x=getDeafulterListHTML(rv,caption);
@@ -389,7 +330,6 @@ function sendEmails(sessionid,classid,facid,cutoff)
         },
         success: function (result) {
             $("#overlay").fadeOut();
-            //$('#pStatus').text('EMAIL SENT');
             if(result['mailsent']=='OK')
             {
                 loadDefaulter('EMAIL SENT');
@@ -414,26 +354,21 @@ function loadTakeAttendance()
          let ondate=$("#dtpondate").val();
          if(sessionid!=-1)
          {
-            //here we want to fetch the student list along with the
-            //attendance on current date. For that we also have to
-            //pass facid and ondate to the following function
             fetchStudentList(sessionid,classid,facid,ondate);
          }
 }
 function loadDefaulter(caption='')
 {
-    let sessionid=$("#ddlclass").val();//sorry for the name
+    let sessionid=$("#ddlclass").val();
         let classid=$("#hiddenSelectedCourseID").val();
         let facid=$("#hiddenFacId").val();
         let cutoff=$("#txtCutOff").val();
-        // Check if data is a number
         if (cutoff!='' && !isNaN(cutoff)) {
             getDefaulterList(sessionid,classid,facid,cutoff,caption);
         } else {
            alert('INVALID INPUT');
         }
 }
-//as soon as the page is done loading do the following
 $(function(e)
 {
     $(document).on("click","#btnLogout",function(ee)
@@ -446,15 +381,15 @@ $(function(e)
                 data:{id:1},
                 beforeSend:function(e){
                     $("#overlay").fadeIn();
-                    //$("#overlay").fadeOut();
+        
                 },
                 success:function(e){
-                     //$("#overlay").fadeIn();
+                   
                         $("#overlay").fadeOut();
                     document.location.replace("login.php");
                 },
                 error:function(e){
-                    //$("#overlay").fadeIn();
+              
                     $("#overlay").fadeOut();
                     alert("Something went wrong!");
                 }
@@ -470,39 +405,35 @@ $(function(e)
         let si=$("#ddlclass").val();
         if(si!=-1)
         {
-            //alert(si);
+         
             let sessionid=si;
             let facid=$("#hiddenFacId").val();
             fetchFacultyCourses(facid,sessionid);
         }     
     });
     $(document).on("click",".classcard",function(e){
-         //what is the underlyning object?
+      
          let classobject=$(this).data('classobject');
-         //remember the classid
+
          $("#hiddenSelectedCourseID").val(classobject['id']);
-         //alert(JSON.stringify(classobject));
+
          let x=getClassdetailsAreaHTML(classobject);
          $("#classdetailsarea").html(x);
-         //now fill the studentlist 
-         //for session and course
-         let sessionid=$("#ddlclass").val();//sorry for the name
+ 
+         let sessionid=$("#ddlclass").val();
          let classid=classobject['id'];
          let facid=$("#hiddenFacId").val();
          let ondate=$("#dtpondate").val();
          if(sessionid!=-1)
          {
-            //here we want to fetch the student list along with the
-            //attendance on current date. For that we also have to
-            //pass facid and ondate to the following function
             fetchStudentList(sessionid,classid,facid,ondate);
          }
         
     });
     $(document).on("click",".cbpresent",function(e){
-      //say get the check state
+
       let ispresent=this.checked;     
-      //ispresent is a boolean value, convert it to YES NO
+
       if(ispresent)
       {
         ispresent="YES";
@@ -510,59 +441,46 @@ $(function(e)
       else{
         ispresent="NO";
       }
-      //alert(ispresent);
 
-      //if we want to save the attendance we need to know
-      //studentid=??, ispresent,courseid,facultyid,sessionid
-      //date
       let studentid=$(this).data('studentid');
       let courseid=$("#hiddenSelectedCourseID").val();
       let facultyid= $("#hiddenFacId").val();
       let sessionid=$("#ddlclass").val();
       let ondate=$("#dtpondate").val();
-      //alert(studentid+" "+courseid+" "+facultyid+" "+sessionid+" "+ondate);
+   
       saveAttendance(studentid,courseid,facultyid,sessionid,ondate,ispresent);
     });
     $(document).on("change","#dtpondate",function(e){
-      //alert($("#dtpondate").val());
-      //now load the studentlist on this day
          loadTakeAttendance();
     });
     $(document).on("click","#btnLoadDeafulterList",function(){
-        //alert("CLICKED");
         loadDefaulter();
         
     })
     $(document).on("keydown","#txtCutOff",function(event){
-        // Get the key code of the pressed key
         const keyCode = event.keyCode || event.which;
-
-        // Allow only numbers, decimal point, backspace, delete, arrow keys, and decimal point
-        if (!(/[0-9\b\.\t]/.test(String.fromCharCode(keyCode)) || // Numbers, backspace, tab, and decimal point
-            keyCode === 46 || // Delete key
-            (keyCode >= 37 && keyCode <= 40))) { // Arrow keys
-            event.preventDefault(); // Prevent the default action
+        if (!(/[0-9\b\.\t]/.test(String.fromCharCode(keyCode)) || 
+            keyCode === 46 || 
+            (keyCode >= 37 && keyCode <= 40))) {
+            event.preventDefault(); 
         }
 
-        // Allow only one decimal point
         const value = this.value;
         if (keyCode === 46 && value.indexOf('.') !== -1) {
             event.preventDefault();
         }
     })
     $(document).on("click","#btnSendEmail",function(){
-        let sessionid=$("#ddlclass").val();//sorry for the name
+        let sessionid=$("#ddlclass").val();
         let classid=$("#hiddenSelectedCourseID").val();
         let facid=$("#hiddenFacId").val();
         let cutoff=$("#txtCutOff").val();
-        // Check if data is a number
         if (cutoff!='' && !isNaN(cutoff)) {
             sendEmails(sessionid,classid,facid,cutoff);
         } else {
            alert('INVALID INPUT');
         }
     })
-    //loadTakeAttendance()
     $(document).on("click","#linkTakeAttendance",function(){
         loadTakeAttendance();
     })
@@ -572,21 +490,17 @@ $(function(e)
     })
     
     $(document).on("click","#linkReport",function(){
-        /*let sessionid=$("#ddlclass").val();//sorry for the name
-        let classid=$("#hiddenSelectedCourseID").val();
-        let facid=$("#hiddenFacId").val();
-        downloadCSV(sessionid,classid,facid);*/
         let x=getReportPanel();
         $("#studentlistarea").html(x);
      })
      $(document).on("click","#btnSummary",function(){
-        let sessionid=$("#ddlclass").val();//sorry for the name
+        let sessionid=$("#ddlclass").val();
         let classid=$("#hiddenSelectedCourseID").val();
         let facid=$("#hiddenFacId").val();
         downloadCSV(sessionid,classid,facid,'downloadSummaryReport');
      })
      $(document).on("click","#btnDetailed",function(){
-        let sessionid=$("#ddlclass").val();//sorry for the name
+        let sessionid=$("#ddlclass").val();
         let classid=$("#hiddenSelectedCourseID").val();
         let facid=$("#hiddenFacId").val();
         downloadCSV(sessionid,classid,facid,'downloadDetailsReport');
